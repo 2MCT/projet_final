@@ -65,7 +65,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(737, 612);
+        MainWindow->resize(730, 615);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setStyleSheet(QString::fromUtf8("*{\n"
@@ -170,7 +170,7 @@ public:
         horizontalLayout_2->addWidget(frame_3);
 
 
-        verticalLayout->addWidget(header, 0, Qt::AlignTop);
+        verticalLayout->addWidget(header);
 
         frame_2 = new QFrame(centralwidget);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
@@ -360,7 +360,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 737, 22));
+        menubar->setGeometry(QRect(0, 0, 730, 22));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);
@@ -371,6 +371,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+#if QT_CONFIG(tooltip)
+        menuBtn->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"justify\"><img src=\":/icons/logo.jpeg\"/></p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         menuBtn->setText(QCoreApplication::translate("MainWindow", "MENU", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "2MCT's Project", nullptr));
         btnSearch->setText(QCoreApplication::translate("MainWindow", "Aceuil", nullptr));

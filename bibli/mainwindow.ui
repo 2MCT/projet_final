@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>737</width>
-    <height>612</height>
+    <width>730</width>
+    <height>615</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,7 +63,7 @@ QPushButton:clicked{
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item alignment="Qt::AlignTop">
+    <item>
      <widget class="QFrame" name="header">
       <property name="minimumSize">
        <size>
@@ -153,6 +153,9 @@ QPushButton:clicked{
               <width>16777215</width>
               <height>70</height>
              </size>
+            </property>
+            <property name="toolTip">
+             <string/>
             </property>
             <property name="styleSheet">
              <string notr="true">#menuBtn{
@@ -588,7 +591,7 @@ QPushButton:clicked{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>737</width>
+     <width>730</width>
      <height>22</height>
     </rect>
    </property>

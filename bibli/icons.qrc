@@ -574,5 +574,6 @@
         <file>iconWhite/zap.svg</file>
         <file>iconWhite/zoom-in.svg</file>
         <file>iconWhite/zoom-out.svg</file>
+        <file>icons/logo.jpeg</file>
     </qresource>
 </RCC>
