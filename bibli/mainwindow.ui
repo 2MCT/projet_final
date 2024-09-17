@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>615</height>
+    <width>1069</width>
+    <height>821</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -168,7 +168,7 @@ QPushButton:clicked{
             </property>
             <property name="icon">
              <iconset resource="icons.qrc">
-              <normaloff>:/iconWhite/align-justify.svg</normaloff>:/iconWhite/align-justify.svg</iconset>
+              <normaloff>:/icons/smile.svg</normaloff>:/icons/smile.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -278,7 +278,7 @@ QPushButton:clicked{
          <property name="maximumSize">
           <size>
            <width>100</width>
-           <height>700</height>
+           <height>16777215</height>
           </size>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -331,14 +331,14 @@ QPushButton:clicked{
               <number>0</number>
              </property>
              <item>
-              <widget class="QPushButton" name="btnSearch">
+              <widget class="QPushButton" name="btnAccueil">
                <property name="styleSheet">
-                <string notr="true">#btnSearch{
-	text-align: left
+                <string notr="true">#btnAccueil{
+	text-align: left;
 }</string>
                </property>
                <property name="text">
-                <string>Aceuil</string>
+                <string>Accueil</string>
                </property>
                <property name="icon">
                 <iconset resource="icons.qrc">
@@ -573,9 +573,141 @@ QPushButton:clicked{
               <height>0</height>
              </size>
             </property>
-            <widget class="QWidget" name="page"/>
-            <widget class="QWidget" name="page_3"/>
-            <widget class="QWidget" name="page_2"/>
+            <widget class="QWidget" name="acueil">
+             <widget class="QPushButton" name="pushButton">
+              <property name="geometry">
+               <rect>
+                <x>300</x>
+                <y>140</y>
+                <width>161</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>acueil</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="dashboar">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="geometry">
+               <rect>
+                <x>420</x>
+                <y>220</y>
+                <width>151</width>
+                <height>101</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>dashboard</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="membre">
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="geometry">
+               <rect>
+                <x>270</x>
+                <y>180</y>
+                <width>191</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>membre</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="livres">
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="geometry">
+               <rect>
+                <x>380</x>
+                <y>220</y>
+                <width>191</width>
+                <height>91</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>livres</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="emprunt">
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="geometry">
+               <rect>
+                <x>340</x>
+                <y>250</y>
+                <width>131</width>
+                <height>61</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>emprunt</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="communication">
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="geometry">
+               <rect>
+                <x>270</x>
+                <y>190</y>
+                <width>201</width>
+                <height>61</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>communication</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="parametres">
+             <widget class="QPushButton" name="pushButton_7">
+              <property name="geometry">
+               <rect>
+                <x>340</x>
+                <y>230</y>
+                <width>131</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>parametres</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="apropos">
+             <widget class="QPushButton" name="pushButton_8">
+              <property name="geometry">
+               <rect>
+                <x>290</x>
+                <y>220</y>
+                <width>201</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>apropos</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="aide">
+             <widget class="QPushButton" name="pushButton_9">
+              <property name="geometry">
+               <rect>
+                <x>250</x>
+                <y>220</y>
+                <width>201</width>
+                <height>71</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>aide</string>
+              </property>
+             </widget>
+            </widget>
            </widget>
           </item>
          </layout>
@@ -591,7 +723,7 @@ QPushButton:clicked{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>730</width>
+     <width>1069</width>
      <height>22</height>
     </rect>
    </property>
