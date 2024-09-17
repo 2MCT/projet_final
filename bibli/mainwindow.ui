@@ -441,7 +441,7 @@ QPushButton:clicked{
               <widget class="QPushButton" name="btnCommunication">
                <property name="styleSheet">
                 <string notr="true">#btnCommunication{
-	padding-left : 25px;
+	text-align: left;
 }</string>
                </property>
                <property name="text">
@@ -589,7 +589,7 @@ QPushButton:clicked{
      <x>0</x>
      <y>0</y>
      <width>737</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
