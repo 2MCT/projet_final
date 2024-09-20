@@ -7,6 +7,8 @@
 #include <QSqlError>
 #include <QDebug>
 
+#include <QtCharts>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -38,11 +40,18 @@ private slots:
 
     void on_btnAccueil_clicked();
 
+    /*===================*/
+    void updateChart();
+    /*===================*/
+
+
 private:
     Ui::MainWindow *ui;
 
     QSqlDatabase db;
     QSqlQuery query;
+
+    QChart *m_chart;
 
 };
 #endif // MAINWINDOW_H
