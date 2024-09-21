@@ -26,3 +26,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/binre
 RESOURCES += \
     icons.qrc
 
+

@@ -53,5 +53,7 @@ private:
 
     QChart *m_chart;
 
+    void displayData(QTableWidget *tableView);
+
 };
 #endif // MAINWINDOW_H

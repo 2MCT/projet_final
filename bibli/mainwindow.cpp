@@ -24,9 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setDatabaseName("biblio");
-    db.setHostName("192.168.43.1");
-    db.setUserName("2MCT");
-    db.setPassword("2MCT@database");
+    db.setHostName("localhost");
+    db.setUserName("Miarimanana");
+    db.setPassword("miarimanana2006");
 
     if (!db.open()) {
         qDebug() << "DATABASE IS NOT CONNECTED :(";
@@ -86,8 +86,7 @@ void MainWindow::on_btnDash_clicked()
     }
 
     QBarSeries *series = new QBarSeries();
-    QBarSet *set_1 = new QBarSet("Visiteurs");
-    QBarSet *set_2 = new QBarSet("Emprunteurs");
+    QBarSet *set_1 = new QBarSet("Emprunteurs");
 
     set_1->append(55);
     set_1->append(80);
@@ -96,24 +95,14 @@ void MainWindow::on_btnDash_clicked()
     set_1->append(65);
     set_1->append(50);
 
-    set_2->append(40);
-    set_2->append(50);
-    set_2->append(65);
-    set_2->append(30);
-    set_2->append(20);
-    set_2->append(30);
-
     set_1->setPen(QPen(Qt::blue, 1));
     set_1->setBrush(Qt::blue);
-    set_2->setPen(QPen(Qt::black, 1));
-    set_2->setBrush(Qt::black);
 
     series->append(set_1);
-    series->append(set_2);
 
     m_chart = new QChart();
     m_chart->addSeries(series);
-    m_chart->setTitle("Visiteurs et Emprunteurs");
+    m_chart->setTitle("EMPRUNTEURS");
     m_chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList jours;
@@ -156,22 +145,22 @@ void MainWindow::on_btnDash_clicked()
     QPieSeries *series_2 = new QPieSeries();
     series_2->setHoleSize(0.5);
 
-    QPieSlice *slice_1 = series_2->append("Nouveau", 30);
+    QPieSlice *slice_1 = series_2->append("Nouveaux", 30);
     //slice_1->setLabelVisible(true);
     slice_1->setPen(QPen(Qt::green, 1));
     slice_1->setBrush(Qt::green);
 
-    QPieSlice *slice_2 = series_2->append("Perdu", 5);
+    QPieSlice *slice_2 = series_2->append("Perdus", 5);
     //slice_2->setLabelVisible(true);
     slice_2->setPen(QPen(Qt::red, 1));
     slice_2->setBrush(Qt::red);
 
-    QPieSlice *slice_3 = series_2->append("Retourné", 20);
+    QPieSlice *slice_3 = series_2->append("Retournés", 20);
     //slice_3->setLabelVisible(true);
     slice_3->setPen(QPen(Qt::yellow, 1));
     slice_3->setBrush(Qt::yellow);
 
-    QPieSlice *slice_4 = series_2->append("Sorti", 15);
+    QPieSlice *slice_4 = series_2->append("Sortis", 15);
     //slice_4->setLabelVisible(true);
     slice_4->setPen(QPen(Qt::blue, 1));
     slice_4->setBrush(Qt::blue);
@@ -261,6 +250,7 @@ void MainWindow::updateChart()
 void MainWindow::on_btnMember_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    this->displayData(ui->resultMembre) ;
 }
 
 
@@ -297,6 +287,78 @@ void MainWindow::on_btnAbout_clicked()
 void MainWindow::on_btnHelp_clicked()
 {
     ui->stackedWidget->setCurrentIndex(8);
+}
+
+/*=====================================================*/
+
+void MainWindow::displayData(QTableWidget *tableView){
+    tableView->setColumnCount(6) ;
+    tableView->setHorizontalHeaderLabels({"ID","NOM","PRENOM", "TELEPHONE","EMAIL","ADRESSE"}) ;
+    tableView->setColumnWidth(0,130) ;
+    tableView->setColumnWidth(1,200) ;
+    tableView->setColumnWidth(2,200) ;
+    tableView->setColumnWidth(3,120) ;
+    tableView->setColumnWidth(4,230) ;
+    tableView->setColumnWidth(5,200) ;
+
+    tableView->setAlternatingRowColors(true);
+
+    tableView->setStyleSheet(
+         "QTableWidget::item {"
+         "  background-color : #98caf8;"
+         "}"
+
+         "QTableWidget::item:alternate {"
+         "  background-color : #e3f4f7;"
+         "}"
+
+         "QTableWidget::item {"
+         "  color : #101f36;"
+         "  padding-top : 15px;"
+         "  padding-bottom : 15px;"
+         "}"
+
+    );
+
+    QSqlQuery query(db);
+    query.prepare("SELECT NUMADHERENT, NOM, PRENOM, TEL, EMAIL, ADRESSE FROM adherent WHERE 1;");
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << query.lastError().text();
+        return;
+    }
+    int row = 0;
+
+    while(query.next()){
+        tableView->insertRow(row) ;
+        QLabel *Action = new QLabel ;
+        Action->setText("Modifier") ;
+        QTableWidgetItem *num = new QTableWidgetItem(query.value(0).toString()) ;
+        QTableWidgetItem *nom = new QTableWidgetItem(query.value(1).toString()) ;
+        QTableWidgetItem *prenom = new QTableWidgetItem(query.value(2).toString()) ;
+        QTableWidgetItem *tel = new QTableWidgetItem(query.value(3).toString()) ;
+        QTableWidgetItem *mail = new QTableWidgetItem(query.value(4).toString()) ;
+        QTableWidgetItem *adress = new QTableWidgetItem(query.value(5).toString()) ;
+
+        num->setFlags(num->flags() & ~Qt::ItemIsEditable) ;
+        nom->setFlags(nom->flags() & ~Qt::ItemIsEditable) ;
+        prenom->setFlags(prenom->flags() & ~Qt::ItemIsEditable) ;
+        tel->setFlags(tel->flags() & ~Qt::ItemIsEditable) ;
+        mail->setFlags(mail->flags() & ~Qt::ItemIsEditable) ;
+        adress->setFlags(adress->flags() & ~Qt::ItemIsEditable) ;
+
+        tableView->setItem(row, 0, num) ;
+        tableView->setItem(row, 1, nom) ;
+        tableView->setItem(row, 2, prenom) ;
+        tableView->setItem(row, 3, tel) ;
+        tableView->setItem(row, 4, mail) ;
+        tableView->setItem(row, 5, adress) ;
+//        if(tableView->item(row,0)->isS+elected() or tableView->item(row,1)->isSelected() or tableView->item(row,2)->isSelected() or tableView->item(row,3)->isSelected()  or tableView->item(row,4)->isSelected() ){
+//            ui->formWidget->show();
+//        }
+        row++;
+     }
+
 }
 
 
