@@ -23,6 +23,8 @@ void badge::addProfil(QWidget *container, QString source){
     QPixmap scaledPixmap = pixmap.scaled(labelSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 //    label->setScaledContents(true);
 //    label->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    QVBoxLayout *layout = new QVBoxLayout(ui->imgContainer);
+    label->setLayout(layout);
     label->setMinimumHeight(200);
     label->setMinimumWidth(200);
     label->setPixmap(pixmap);
