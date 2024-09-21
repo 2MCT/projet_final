@@ -646,6 +646,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
             <widget class="QWidget" name="acueil">
              <widget class="QPushButton" name="pushButton">
               <property name="geometry">
@@ -711,7 +714,7 @@
                     <property name="geometry">
                      <rect>
                       <x>0</x>
-                      <y>-211</y>
+                      <y>0</y>
                       <width>874</width>
                       <height>1170</height>
                      </rect>
@@ -905,14 +908,14 @@
                                  <item>
                                   <layout class="QHBoxLayout" name="horizontalLayout_12">
                                    <item>
-                                    <widget class="QLabel" name="label_2">
+                                    <widget class="QLabel" name="new_books_count">
                                      <property name="styleSheet">
                                       <string notr="true">#label_2{
 	font-size:30px;
 }</string>
                                      </property>
                                      <property name="text">
-                                      <string>10000</string>
+                                      <string>0</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -987,7 +990,7 @@
                                  <item>
                                   <layout class="QHBoxLayout" name="horizontalLayout_13">
                                    <item>
-                                    <widget class="QLabel" name="label_6">
+                                    <widget class="QLabel" name="lost_books_count">
                                      <property name="font">
                                       <font>
                                        <pointsize>20</pointsize>
@@ -996,7 +999,7 @@
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>14</string>
+                                      <string>0</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -1070,14 +1073,14 @@
                                  <item>
                                   <layout class="QHBoxLayout" name="horizontalLayout_14">
                                    <item>
-                                    <widget class="QLabel" name="label_9">
+                                    <widget class="QLabel" name="borrows_books_count">
                                      <property name="font">
                                       <font>
                                        <pointsize>20</pointsize>
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>500</string>
+                                      <string>0</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -1151,14 +1154,14 @@
                                  <item>
                                   <layout class="QHBoxLayout" name="horizontalLayout_16">
                                    <item>
-                                    <widget class="QLabel" name="label_15">
+                                    <widget class="QLabel" name="returned_books_count">
                                      <property name="font">
                                       <font>
                                        <pointsize>20</pointsize>
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>450</string>
+                                      <string>0</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -1232,14 +1235,14 @@
                                  <item>
                                   <layout class="QHBoxLayout" name="horizontalLayout_15">
                                    <item>
-                                    <widget class="QLabel" name="label_12">
+                                    <widget class="QLabel" name="avalaible_books_count">
                                      <property name="font">
                                       <font>
                                        <pointsize>20</pointsize>
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>900</string>
+                                      <string>0</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -1349,22 +1352,28 @@
                              <property name="frameShadow">
                               <enum>QFrame::Raised</enum>
                              </property>
-                            </widget>
-                           </item>
-                           <item alignment="Qt::AlignRight">
-                            <widget class="QFrame" name="frame_11">
-                             <property name="minimumSize">
-                              <size>
-                               <width>450</width>
-                               <height>100</height>
-                              </size>
-                             </property>
-                             <property name="frameShape">
-                              <enum>QFrame::StyledPanel</enum>
-                             </property>
-                             <property name="frameShadow">
-                              <enum>QFrame::Raised</enum>
-                             </property>
+                             <widget class="QFrame" name="frame_11">
+                              <property name="geometry">
+                               <rect>
+                                <x>420</x>
+                                <y>-10</y>
+                                <width>450</width>
+                                <height>400</height>
+                               </rect>
+                              </property>
+                              <property name="minimumSize">
+                               <size>
+                                <width>450</width>
+                                <height>100</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                             </widget>
                             </widget>
                            </item>
                           </layout>
@@ -1606,7 +1615,7 @@
                                            </layout>
                                           </item>
                                           <item>
-                                           <widget class="QLabel" name="label_7">
+                                           <widget class="QLabel" name="new_members_count">
                                             <property name="font">
                                              <font>
                                               <pointsize>20</pointsize>
@@ -1615,7 +1624,7 @@
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>200</string>
+                                             <string>0</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -1687,7 +1696,7 @@
                                            </layout>
                                           </item>
                                           <item>
-                                           <widget class="QLabel" name="label_14">
+                                           <widget class="QLabel" name="ex_members_count">
                                             <property name="font">
                                              <font>
                                               <pointsize>20</pointsize>
@@ -1696,7 +1705,7 @@
                                              </font>
                                             </property>
                                             <property name="text">
-                                             <string>15</string>
+                                             <string>0</string>
                                             </property>
                                            </widget>
                                           </item>
@@ -1769,7 +1778,7 @@
                                         </layout>
                                        </item>
                                        <item>
-                                        <widget class="QLabel" name="label_18">
+                                        <widget class="QLabel" name="total_members_count">
                                          <property name="font">
                                           <font>
                                            <pointsize>20</pointsize>
@@ -1778,7 +1787,7 @@
                                           </font>
                                          </property>
                                          <property name="text">
-                                          <string>20000</string>
+                                          <string>0</string>
                                          </property>
                                         </widget>
                                        </item>
@@ -1821,7 +1830,7 @@
                                     <item alignment="Qt::AlignTop">
                                      <widget class="QLabel" name="label_19">
                                       <property name="text">
-                                       <string>Titre</string>
+                                       <string>Membres</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -1853,9 +1862,9 @@
                                        <item>
                                         <layout class="QHBoxLayout" name="horizontalLayout_25">
                                          <item>
-                                          <widget class="QLabel" name="label_21">
+                                          <widget class="QLabel" name="particuliers_count">
                                            <property name="text">
-                                            <string>10</string>
+                                            <string>0</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -1871,9 +1880,9 @@
                                        <item>
                                         <layout class="QHBoxLayout" name="horizontalLayout_26">
                                          <item>
-                                          <widget class="QLabel" name="label_22">
+                                          <widget class="QLabel" name="students_count">
                                            <property name="text">
-                                            <string>25</string>
+                                            <string>0</string>
                                            </property>
                                           </widget>
                                          </item>
@@ -2056,7 +2065,7 @@
      <x>0</x>
      <y>0</y>
      <width>1069</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

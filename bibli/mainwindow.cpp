@@ -16,12 +16,66 @@
 
 #include <QtCharts>
 #include <QLayout>
+
+QString new_members(QSqlQuery query){
+    query.exec("SELECT COUNT(*) FROM ADHERENT WHERE DATEADHESION > DATE_SUB(CURDATE(), INTERVAL 4 WEEK)") ;
+    QString result ;
+    while(query.next())
+        result = query.value(0).toString() ;
+    return result ;
+}
+
+QString ex_members(QSqlQuery query){
+    query.exec("SELECT COUNT(*) FROM ADHERENT WHERE DATE_SUB(CURDATE(), INTERVAL 1 YEAR)>DATEADHESION")  ;
+    QString result ;
+    while(query.next())
+        result = query.value(0).toString() ;
+    return result ;
+}
+
+QString particuliers(QSqlQuery query){
+    query.exec("SELECT count(*) FROM ADHERENT WHERE NUMADHERENT REGEXP '.*P.*' ;")  ;
+    QString result ;
+    while(query.next())
+        result = query.value(0).toString() ;
+    return result ;
+}
+
+QString students(QSqlQuery query){
+    query.exec("SELECT count(*) FROM ADHERENT WHERE NUMADHERENT REGEXP '.*E.*' ;")  ;
+    QString result ;
+    while(query.next())
+        result = query.value(0).toString() ;
+    return result ;
+}
+
+QString total_members(QSqlQuery query){
+    query.exec("SELECT count(*) FROM ADHERENT WHERE 1;")  ;
+    QString result ;
+    while(query.next())
+        result = query.value(0).toString() ;
+    return result ;
+}
+
+int emprunteurs(QSqlQuery query, int x) {
+    query.prepare("SELECT COUNT(*) FROM EMPRUNTER WHERE DATE_PRET = DATE_SUB(CURDATE(), INTERVAL :X DAY) ;") ;
+    query.bindValue(":X",x) ;
+    query.exec() ;
+    int result ;
+    while(query.next())
+        result = query.value(0).toInt() ;
+    return result ;
+}
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+
+    ui->new_books_count->setStyleSheet("font-size: 30px;") ;
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setDatabaseName("biblio");
     db.setHostName("192.168.43.1");
@@ -72,6 +126,21 @@ void MainWindow::on_btnDash_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 
     QWidget *barChartContainer = ui->frame_10;
+    QString avalaible_books ;
+    QSqlQuery avalaible_book ;
+    avalaible_book.prepare("SELECT COUNT(NUMEXEMPLAIRE) FROM EXEMPLAIRE WHERE (COTELIVRE, NUMEXEMPLAIRE) NOT IN (SELECT COTELIVRE, NUMEXEMPLAIRE FROM EMPRUNTER WHERE DATERETOUR IS NULL);") ;
+    if(avalaible_book.exec()){
+        while(avalaible_book.next()){
+            avalaible_books = avalaible_book.value(0).toString() ;
+        }
+    ui->avalaible_books_count->setText(avalaible_books) ;
+}
+    QSqlQuery query;
+    ui->new_members_count->setText(new_members(query)) ;
+    ui->ex_members_count->setText(ex_members(query)) ;
+    ui->particuliers_count->setText(particuliers(query)) ;
+    ui->students_count->setText(students(query)) ;
+    ui->total_members_count->setText(total_members(query)) ;
 
     if (barChartContainer->layout() == nullptr) {
         QVBoxLayout *layout = new QVBoxLayout(barChartContainer);
@@ -86,34 +155,28 @@ void MainWindow::on_btnDash_clicked()
     }
 
     QBarSeries *series = new QBarSeries();
-    QBarSet *set_1 = new QBarSet("Visiteurs");
     QBarSet *set_2 = new QBarSet("Emprunteurs");
+/**
+    Modification de chart(emprunteurs)
+**/
+    QDate date ;
+    QDate y = date.currentDate() ;
+    int x = y.dayOfWeek();
+    for (int i = 7; i > 0; i--) {
+        if((x-i+7) % 7 != 0){
+            //qDebug() << emprunteurs(query,(x-i+7)%7) ;
+            set_2->append(emprunteurs(query,(x-i+7)%7)) ;
+        }
+    }
 
-    set_1->append(55);
-    set_1->append(80);
-    set_1->append(90);
-    set_1->append(70);
-    set_1->append(65);
-    set_1->append(50);
-
-    set_2->append(40);
-    set_2->append(50);
-    set_2->append(65);
-    set_2->append(30);
-    set_2->append(20);
-    set_2->append(30);
-
-    set_1->setPen(QPen(Qt::blue, 1));
-    set_1->setBrush(Qt::blue);
     set_2->setPen(QPen(Qt::black, 1));
     set_2->setBrush(Qt::black);
 
-    series->append(set_1);
     series->append(set_2);
 
     m_chart = new QChart();
     m_chart->addSeries(series);
-    m_chart->setTitle("Visiteurs et Emprunteurs");
+    m_chart->setTitle("Emprunteurs");
     m_chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList jours;
@@ -127,7 +190,7 @@ void MainWindow::on_btnDash_clicked()
     series->attachAxis(axeX);
 
     QValueAxis *axeY = new QValueAxis();
-    axeY->setRange(0, 100);
+    axeY->setRange(0, 5);
     m_chart->addAxis(axeY, Qt::AlignLeft);
     series->attachAxis(axeY);
 
@@ -155,12 +218,16 @@ void MainWindow::on_btnDash_clicked()
 
     QPieSeries *series_2 = new QPieSeries();
     series_2->setHoleSize(0.5);
-
-    QPieSlice *slice_1 = series_2->append("Nouveau", 30);
+    QSqlQuery new_books ;
+    int count = 0;
+    new_books.exec("SELECT COUNT(COTELIVRE) FROM LIVRE") ;
+    while(new_books.next()){
+        count = new_books.value(0).toInt() ;
+    }
+    QPieSlice *slice_1 = series_2->append("Nouveau",count);
     //slice_1->setLabelVisible(true);
     slice_1->setPen(QPen(Qt::green, 1));
     slice_1->setBrush(Qt::green);
-
     QPieSlice *slice_2 = series_2->append("Perdu", 5);
     //slice_2->setLabelVisible(true);
     slice_2->setPen(QPen(Qt::red, 1));
@@ -213,11 +280,11 @@ void MainWindow::on_btnDash_clicked()
    QPieSeries *series_3 = new QPieSeries();
    series_3->setHoleSize(0);
 
-   QPieSlice *slc_1 = series_3->append("PARTICULIERS",30);
+   QPieSlice *slc_1 = series_3->append("PARTICULIERS",particuliers(query).toInt());
    slc_1->setPen(QPen(Qt::blue, 0));
    slc_1->setBrush(Qt::blue);
 
-   QPieSlice *slc_2 = series_3->append("ETUDIANTS", 25);
+   QPieSlice *slc_2 = series_3->append("ETUDIANTS", students(query).toInt());
    slc_2->setPen(QPen(Qt::black, 0));
    slc_2->setBrush(Qt::black);
 
@@ -298,5 +365,4 @@ void MainWindow::on_btnHelp_clicked()
 {
     ui->stackedWidget->setCurrentIndex(8);
 }
-
 
